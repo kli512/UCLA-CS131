@@ -1,0 +1,30 @@
+While solving this assignment, I strove for three things:
+
+1. to write clean functional code 2. to write efficient solutions 3. to avoid
+using other modules when possible
+
+The reason behind the first is obvious; I intend to learn and understand how to
+write OCaml, and thus I used pattern matching whenever it made sense (which was
+often) and wrote clearly and without side effects. The reason behind the second
+is also fairly simple, and not hard to achieve. Arguably, I complicated
+functions such as set_union by refusing to use the append operator (@) (or List
+functions) and instead writing it out, but this allowed my solution to keep a
+and b as proper sets, assuming they came in as proper sets and is clear, as the
+recursions are quite simple. By keeping proper sets, the search computed by
+computed_fixed_point for filter_reachable is made much more efficient. The last
+choice I made was to avoid using other modules when possible. This is for the
+reasons I mentioned (optimal solutions, code clarity) in addition to there being
+such elegant functional solutions for each question - I wanted to write those
+solutions out. For example, I did this for element_of, which is the same as
+List.mem
+
+One optimization I didn't make was in filter_reachable, I use a BFS-style tree
+search to expand the fringe of reachable non-terminal symbols until the fringe
+stops expanding (i.e. we've found all reachable non-terminal symbols). The
+inefficiency lies in using a tree search. Because of this, I can expand the same
+non-terminal symbol in multiple generations. Because we are dealing with CFG's,
+the path to a symbol is irrelevant; thus, I could have done a graph search.
+Asymptotically, the runtime is still the same but the real runtime would be much
+faster for a complicated grammar. I did this because it would require data
+structures too complicated to make for this (i.e. hash tables for sets or
+matricies)

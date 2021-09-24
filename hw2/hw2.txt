@@ -1,0 +1,14 @@
+When building the make parser function, I wanted to use make matcher. However,
+it became apparent that the way I wanted to do it would require make matcher to
+also return the node before the suffix.
+
+What I would have liked to do is to use make matcher to determine the validity
+of the fragment by matching it with an empty suffix (thereby implying a complete
+fragment), then generate the parse tree seperately. However, it was much easier
+to actually use information from the matcher to help generate the parse tree.
+
+So, I rewrote the make_matcher functions with slight modifications to do what I
+now wanted it to do, and with that I was able to create the parse tree by
+testing non-terminals and expanding them into lower non-terminals until I
+reached terminal leaves of the parse tree. From what I believe, my
+implementation should work fully.
